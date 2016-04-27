@@ -8,6 +8,16 @@ This is an example generator for creating Minkie plugins, clone this template an
 - NAMESPACE: Namespace of the application
 - APPLICATION_LOCATION: File path for the build artefacts
 
+## Testing your template
+```
+$ bundle
+```
+
+Test your generator by running ...
+```
+$ bundle exec minke -g minke-generator-template -o ../temp -a tester -n mynamespace
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
