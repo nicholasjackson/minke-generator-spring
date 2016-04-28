@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'generators/template/version'
+require 'generators/spring/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "minke-generator-template"
+  spec.name          = "minke-generator-spring"
   spec.version       = Minke::Generators::Template::VERSION
-  spec.authors       = ["Nic Jackson"]
+  spec.authors       = ["Mark", "Bola"]
   spec.email         = ["nicjackson@notonthehighstreet.com"]
 
   spec.summary       = %q{Example template for Minke}
   spec.description   = %q{Example template for Minke}
-  spec.homepage      = "https://github.com/nicholasjackson/minkie-generator-template"
+  spec.homepage      = "https://github.com/notonthehighstreet/minki-generator-spring"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # required so minke knows to load the gem which then registers itself
-  spec.metadata = { 'entrypoint' => 'generators/template' }
+  spec.metadata = { 'entrypoint' => 'generators/spring' }
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"

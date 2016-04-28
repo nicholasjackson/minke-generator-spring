@@ -1,12 +1,3 @@
-<%= SERVICE_NAME %>:
-  image: <%= SERVICE_NAME %>
-  ports:
-    - "8080:8080"
-  environment:
-    - "CONSUL_URI=consul:8500"
-  links:
-    - consul:consul
-    - statsd:statsd
 consul:
   image: progrium/consul
   ports:
@@ -15,12 +6,6 @@ consul:
     - "9600:53/udp"
   hostname: node1
   command: "-server -bootstrap -ui-dir /ui"
-statsd:
-  image: 'hopsoft/graphite-statsd:latest'
-  ports:
-    - "8180:80"
-  expose:
-    - "8125/udp"
 registrator:
   image: 'gliderlabs/registrator:latest'
   links:
