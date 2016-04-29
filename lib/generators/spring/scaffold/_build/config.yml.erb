@@ -10,6 +10,8 @@ docker_registry:
 docker:
   docker_file: './dockerfile/<%= SERVICE_NAME %>/'
   compose_file: './dockercompose/<%= SERVICE_NAME %>/docker-compose.yml'
+  build:
+    docker_file: './dockerfile/build/'
 run:
   consul_loader:
     enabled: true
@@ -22,12 +24,9 @@ cucumber:
     url: <%%= "http://#{ENV['DOCKER_IP']}:9500" %>
   health_check:
     enabled: true
-    url: <%%= "http://#{ENV['DOCKER_IP']}:8091/v1/health" %>
+    url: <%%= "http://#{ENV['DOCKER_IP']}:8080/health" %>
 after_build:
   copy_assets:
     -
-      from: <%= APPLICATION_LOCATION %>
+      from: '../target/<%= SERVICE_NAME %>-0.0.1-SNAPSHOT.jar'
       to: './dockerfile/<%= SERVICE_NAME %>'
-    -
-      from: './swagger_spec/swagger.yml'
-      to: './dockerfile/<%= SERVICE_NAME %>/swagger_spec'

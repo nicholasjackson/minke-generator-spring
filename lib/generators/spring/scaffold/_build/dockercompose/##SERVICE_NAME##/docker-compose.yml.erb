@@ -6,9 +6,9 @@
     - "CONSUL_URI=consul:8500"
     - "CONSUL_WAIT=1s:1s"
     - "CONSUL_STALE=0s"
+    - "CONFIG_DIR=/config"
   links:
     - consul:consul
-    - statsd:statsd
 consul:
   image: progrium/consul
   ports:

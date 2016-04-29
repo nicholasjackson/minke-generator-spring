@@ -5,7 +5,6 @@ EXPOSE 8080
 
 # Create directory for server files
 RUN mkdir /config
-ENV CONFIG_DIR /config
 COPY application.ctmpl /config/application.ctmpl
 
 # add wget and tar
@@ -39,4 +38,5 @@ WORKDIR /app
 
 COPY <%=SERVICE_NAME%>-0.0.1-SNAPSHOT.jar /app/service.jar
 
-CMD
+ENTRYPOINT ["/usr/bin/s6-svscan","/etc/s6"]
+CMD []
