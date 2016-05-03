@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec /usr/bin/consul-template -consul=$CONSUL_URI -wait="$CONSUL_WAIT" -max-stale="$CONSUL_STALE" -template "$CONFIG_DIR/application.ctmpl:$CONFIG_DIR/application.yml:killall java"
