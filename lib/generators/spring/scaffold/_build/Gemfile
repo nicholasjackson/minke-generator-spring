@@ -5,5 +5,5 @@ gem "cucumber", "~> 1.3.10"
 gem "cucumber-rest-api", "= 0.3"
 #gem 'minke'
 #gem 'minke-generator-spring' # Update this to the name of your gem
-gem 'minke', :git => 'git@github.com:nicholasjackson/minke.git', :branch => 'generator'
+gem 'minke', :git => 'https://github.com/nicholasjackson/minke', :branch => 'generator'
 gem 'minke-generator-spring', :git => 'git@github.com:notonthehighstreet/minke-generator-spring.git'
