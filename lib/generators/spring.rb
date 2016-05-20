@@ -12,8 +12,10 @@ module Minke
 
       config.template_location = File.expand_path(File.dirname(__FILE__)) + '/spring/scaffold'
 
-      generate_settings = Minke::Generators::GenerateSettings.new
-      generate_settings.command = ['/bin/sh', '-c', "apk add --update curl && curl https://start.spring.io/starter.tgz -d dependencies=web,actuator -d language=java -d type=maven-project -d baseDir=./ -d groupId=<%= namespace %> -d artifactId=<%= application_name %> | tar -xzvf -"]
+      config.generate_settings = Minke::Generators::GenerateSettings.new.tap do |gs|
+        gs.command = ['/bin/sh', '-c', 'apk add --update curl && curl https://start.spring.io/starter.tgz -d dependencies=web,actuator -d language=java -d type=maven-project -d baseDir=./ -d groupId=<%= namespace %> -d artifactId=<%= application_name %> | tar -xzvf -']
+        gs.docker_image = 'frolvlad/alpine-oraclejdk8:slim'
+      end
 
       config.build_settings = Minke::Generators::BuildSettings.new
       config.build_settings.build_commands = Minke::Generators::BuildCommands.new.tap do |bc|
@@ -22,10 +24,9 @@ module Minke
 
       config.build_settings.docker_settings = Minke::Generators::DockerSettings.new.tap do |bs|
         bs.image = 'frolvlad/alpine-oraclejdk8:slim'
-        bs.binds = ['<%= src_root %>:/src', '<%= src_root %>/.m2:/root/.m2'],
+        bs.binds = ['<%= src_root %>:/src', '<%= src_root %>/.m2:/root/.m2']
         bs.working_directory = '/src'
       end
-
 
       Minke::Generators.register config
     end
