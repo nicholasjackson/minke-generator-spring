@@ -1,32 +1,39 @@
 ---
-application_name: '<%= SERVICE_NAME %>'
-namespace: '<%= NAMESPACE %>'
+application_name: '<%= application_name %>'
+namespace: '<%= namespace %>'
 docker_registry:
-  url: <%%= ENV['DOCKER_REGISTRY_URL'] %>
-  user: <%%= ENV['DOCKER_REGISTRY_USER'] %>
-  password: <%%= ENV['DOCKER_REGISTRY_PASS'] %>
-  email: <%%= ENV['DOCKER_REGISTRY_EMAIL'] %>
-  namespace: <%%= ENV['DOCKER_NAMESPACE'] %>
+  url: <%= ENV['DOCKER_REGISTRY_URL'] %>
+  user: <%= ENV['DOCKER_REGISTRY_USER'] %>
+  password: <%= ENV['DOCKER_REGISTRY_PASS'] %>
+  email: <%= ENV['DOCKER_REGISTRY_EMAIL'] %>
+  namespace: <%= ENV['DOCKER_NAMESPACE'] %>
 docker:
-  docker_file: './dockerfile/<%= SERVICE_NAME %>/'
-  compose_file: './dockercompose/<%= SERVICE_NAME %>/docker-compose.yml'
-  build:
-    docker_file: './dockerfile/build/'
+  application_docker_file: './dockerfile/<%= application_name %>/'
+  application_compose_file: './dockercompose/<%= application_name %>/docker-compose.yml'
+build:
+  post:
+    copy:
+      -
+        from: '../target/<%= application_name %>-0.0.1-SNAPSHOT.jar'
+        to: './dockerfile/<%= application_name %>'
 run:
-  consul_loader:
-    enabled: true
-    config_file: './consul_keys.yml'
-    url: <%%= "http://#{ENV['DOCKER_IP']}:9500" %>
+  pre:
+    consul_loader:
+      config_file: './consul_keys.yml'
+      url:
+        address: consul
+        port: 8500
+        type: private
 cucumber:
-  consul_loader:
-    enabled: true
-    config_file: './consul_keys.yml'
-    url: <%%= "http://#{ENV['DOCKER_IP']}:9500" %>
-  health_check:
-    enabled: true
-    url: <%%= "http://#{ENV['DOCKER_IP']}:8080/health" %>
-after_build:
-  copy_assets:
-    -
-      from: '../target/<%= SERVICE_NAME %>-0.0.1-SNAPSHOT.jar'
-      to: './dockerfile/<%= SERVICE_NAME %>'
+  pre:
+    consul_loader:
+      config_file: './consul_keys.yml'
+      url:
+        address: consul
+        port: 8500
+        type: private
+    health_check:
+      address: <%= application_name %>
+      port: 8080
+      path: /health
+      type: private

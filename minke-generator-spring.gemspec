@@ -5,7 +5,7 @@ require 'generators/spring/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "minke-generator-spring"
-  spec.version       = Minke::Generators::Template::VERSION
+  spec.version       = Minke::Generators::Spring::VERSION
   spec.authors       = ["Mark", "Bola"]
   spec.email         = ["nicjackson@notonthehighstreet.com"]
 
