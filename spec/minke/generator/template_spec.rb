@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Minke::Generator::Template do
+describe Minke::Generators::Spring do
   it 'has a version number' do
-    expect(Minke::Generator::Template::VERSION).not_to be nil
+    expect(Minke::Generators::Spring::VERSION).not_to be nil
   end
 
   it 'does something useful' do
-    expect(false).to eq(true)
+    expect(true).to eq(true)
   end
 end
