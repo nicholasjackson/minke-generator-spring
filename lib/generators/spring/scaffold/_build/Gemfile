@@ -5,4 +5,4 @@ gem 'cucumber-api', '~> 0.3'
 gem 'nokogiri'
 
 gem 'minke'
-gem 'minke-generator-spring', :git => 'git@github.com:notonthehighstreet/minke-generator-spring.git'
+gem 'minke-generator-spring'

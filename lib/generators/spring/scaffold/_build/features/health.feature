@@ -5,6 +5,6 @@ Feature: Health check
 	I want to be able to test functionality of my API
 
 Scenario: Health check returns ok
-	Given I send a GET request to the api endpoint "/health"``
+	Given I send a GET request to the api endpoint "/health"
 	Then the response status should be "200"
 	And the JSON response should have key "status"
